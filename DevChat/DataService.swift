@@ -23,6 +23,11 @@ class DataService {
         return Database.database().reference()
     }
     
+    var usersRef: DatabaseReference {
+        
+        return mainRef.child("users")
+    }
+    
     func saveUser(uid: String) {
         
         let profile: Dictionary<String, AnyObject> = ["Firstname": "" as AnyObject, "Lastname": "" as AnyObject]
