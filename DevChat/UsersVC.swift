@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 
 class UsersVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -126,14 +127,15 @@ class UsersVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 
                 if error != nil {
                     
-                    print("BALINT: Error uploading video \(error?.localizedDescription)")
+                    print("BALINT: Error uploading video \(String(describing: error?.localizedDescription))")
                 } else {
                     
                     let downloadURL = meta?.downloadURL()
+                    DataService.instance.mediaPullRequest(senderUID: Auth.auth().currentUser!.uid, sendingTo: self.selectedUsers, mediaURL: downloadURL!, textSnippet: "Coding today was leggit")
                     //save this somewhere
-                    self.dismiss(animated: true, completion: nil)
                 }
             })
+            self.dismiss(animated: true, completion: nil)
         } else if let snap = snapData {
             
             let snapName = "\(NSUUID().uuidString).jpeg)"
@@ -143,14 +145,13 @@ class UsersVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 
                 if error != nil {
                     
-                    print("BALINT: Error uploadin image \(error?.localizedDescription)")
+                    print("BALINT: Error uploadin image \(String(describing: error?.localizedDescription))")
                 } else {
                     
                     let downloadURL = meta?.downloadURL()
-                    self.dismiss(animated: true, completion: nil)
                 }
             })
-            
+            self.dismiss(animated: true, completion: nil)
             
         }
     }
