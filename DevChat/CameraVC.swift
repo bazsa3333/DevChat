@@ -31,12 +31,12 @@ class CameraVC: AAPLCameraViewController, AAPLCameraVCDelegate {
         
         //If the user not loged in...
         //We don't have a userVC yet, so cannot Log out for testing
-//        guard Auth.auth().currentUser != nil else {
-//            
-//            performSegue(withIdentifier: "LoginVC", sender: nil)
-//            return
-//        }
-        performSegue(withIdentifier: "LoginVC", sender: nil)
+        guard Auth.auth().currentUser != nil else {
+            
+            performSegue(withIdentifier: "LoginVC", sender: nil)
+            return
+        }
+//        performSegue(withIdentifier: "LoginVC", sender: nil)
     }
 
 
@@ -70,6 +70,44 @@ class CameraVC: AAPLCameraViewController, AAPLCameraVCDelegate {
     func recordingHasStarted() {
         
         print("Record has started")
+    }
+    
+    //Minden esetben be akarjuk tölteni a UserVC-t
+    
+    func videoRecordingFailed() {
+        
+        
+    }
+    
+    func videoRecordingComplete(_ videoURL: URL!) {
+        
+        performSegue(withIdentifier: "UsersVC", sender: ["videoURL": videoURL])
+    }
+    
+    func snapshotFailed() {
+        
+        
+    }
+    
+    func snapshotTaken(_ snapshotData: Data!) {
+        
+        performSegue(withIdentifier: "UsersVC", sender: ["snapshotData": snapshotData])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let usersVC = segue.destination as? UsersVC {
+            
+            if let videoDict = sender as? Dictionary<String, URL> {
+                
+                let url = videoDict["videoURL"]
+                usersVC.videoURL = url
+            } else if let snapDict = sender as? Dictionary<String, Data> {
+                
+                let snapData = snapDict["snapshotData"]
+                usersVC.snapData = snapData
+            }
+        }
     }
     
 }

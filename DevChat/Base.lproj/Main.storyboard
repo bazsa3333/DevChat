@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ATb-SH-90B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -66,6 +66,7 @@
                         <outlet property="previewView" destination="xgE-X3-Vbx" id="2oO-Je-x7u"/>
                         <outlet property="recordBtn" destination="PLS-Qt-NYQ" id="9Oj-CI-Hha"/>
                         <segue destination="EiD-72-o4v" kind="presentation" identifier="LoginVC" id="5te-wk-M5s"/>
+                        <segue destination="ATb-SH-90B" kind="show" identifier="UsersVC" id="7ca-tw-OVl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RfA-NJ-7iR">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="H6D-Ob-vOD" customClass="UserCell" customModule="DevChat" customModuleProvider="target">
@@ -118,20 +119,41 @@
                                 </prototypes>
                             </tableView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="VRV-yd-gTT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cAt-P6-Juz"/>
+                                </constraints>
                                 <color key="barTintColor" red="0.27450980390000002" green="0.59215686270000001" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY7-Uq-d5M">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="N7F-JV-HF0"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Send a Pull Request" id="0Sn-g7-umR">
+                                        <barButtonItem key="rightBarButtonItem" image="send_btn" id="4Xq-J4-jah">
+                                            <connections>
+                                                <action selector="sendPRBtnPressed:" destination="ATb-SH-90B" id="Jjd-RB-VIo"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RfA-NJ-7iR" firstAttribute="top" secondItem="VRV-yd-gTT" secondAttribute="bottom" id="1DB-zb-ToD"/>
                             <constraint firstAttribute="trailing" secondItem="RfA-NJ-7iR" secondAttribute="trailing" id="7s2-ML-2A5"/>
                             <constraint firstItem="RfA-NJ-7iR" firstAttribute="leading" secondItem="cfI-tu-WCz" secondAttribute="leading" id="Hr8-8p-ZiC"/>
                             <constraint firstItem="cr1-kL-wnm" firstAttribute="top" secondItem="RfA-NJ-7iR" secondAttribute="bottom" id="JBA-FQ-cvt"/>
+                            <constraint firstItem="RfA-NJ-7iR" firstAttribute="top" secondItem="VRV-yd-gTT" secondAttribute="bottom" id="Kng-E8-ljs"/>
                             <constraint firstItem="VRV-yd-gTT" firstAttribute="leading" secondItem="cfI-tu-WCz" secondAttribute="leading" id="LUg-ge-qQG"/>
                             <constraint firstAttribute="trailing" secondItem="VRV-yd-gTT" secondAttribute="trailing" id="PdD-VT-Akw"/>
-                            <constraint firstItem="VRV-yd-gTT" firstAttribute="top" secondItem="cfI-tu-WCz" secondAttribute="top" id="a7l-re-mvc"/>
+                            <constraint firstItem="VRV-yd-gTT" firstAttribute="top" secondItem="cY7-Uq-d5M" secondAttribute="bottom" id="aJj-0c-jT8"/>
+                            <constraint firstItem="cY7-Uq-d5M" firstAttribute="leading" secondItem="cfI-tu-WCz" secondAttribute="leading" id="bdx-5t-fHR"/>
+                            <constraint firstItem="cY7-Uq-d5M" firstAttribute="top" secondItem="YEj-Ex-GVe" secondAttribute="bottom" id="ci3-bZ-Esf"/>
+                            <constraint firstAttribute="trailing" secondItem="cY7-Uq-d5M" secondAttribute="trailing" id="wdU-9S-WSP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -293,5 +315,6 @@
         <image name="createsnap_btn" width="30" height="30"/>
         <image name="devslopes" width="1080" height="1349"/>
         <image name="devslopes-mountains-white" width="451" height="335"/>
+        <image name="send_btn" width="11" height="18"/>
     </resources>
 </document>

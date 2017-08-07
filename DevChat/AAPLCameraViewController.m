@@ -572,8 +572,9 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 				// The sample buffer is not retained. Create image data before saving the still image to the photo library asynchronously.
 				NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 
-                //[self.delegate snapshotTaken:imageData];
+                [self.delegate snapshotTaken:imageData];
                 
+                //kivettem mert igy nem menti le a disk-re
                 /*
 				[PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
 					if ( status == PHAuthorizationStatusAuthorized ) {
@@ -618,8 +619,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
                  */
 			}
 			else {
-                //[self.delegate snapshotFailed];
-				NSLog( @"Could not capture still image: %@", error );
+                
+                [self.delegate snapshotFailed];
+				
+                NSLog( @"Could not capture still image: %@", error );
 			}
 		}];
 	} );
@@ -663,11 +666,14 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 	if ( error ) {
 		NSLog( @"Movie file finishing error: %@", error );
 		success = [error.userInfo[AVErrorRecordingSuccessfullyFinishedKey] boolValue];
-        //[self.delegate videoRecordingFailed];
+        
+        [self.delegate videoRecordingFailed];
 	}
 	if ( success ) {
         
-        //[self.delegate videoRecordingComplete:outputFileURL];
+        //Nincs szükség már a mentésre a továbbiakban
+        
+        [self.delegate videoRecordingComplete:outputFileURL];
         /*
 		// Check authorization status.
 		[PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
@@ -696,11 +702,13 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 				cleanup();
 			}
 		}];
-         */
+        */
 	}
 	else {
-        //[self.delegate videoRecordingFailed];
-		cleanup();
+        
+        [self.delegate videoRecordingFailed];
+		
+        cleanup();
 	}
 
 	// Enable the Camera and Record buttons to let the user switch camera and start another recording.

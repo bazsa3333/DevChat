@@ -12,14 +12,18 @@
 @protocol AAPLCameraVCDelegate <NSObject>
 
 //azért kell recordUI és CameraUI mert csak akkor lehet megnyomni a Camera gombot ha a készüléknek két kamerája van.
+
+//obj-c-be lehet csinalni optinal protokollokat de swift-ben nem!
+
 -(void)shouldEnableRecordUI:(BOOL)enable;
 -(void)shouldEnableCameraUI:(BOOL)enable;
 -(void)canStartRecording;
 -(void)recordingHasStarted;
-//-(void)videoRecordingComplete:(NSURL*)videoURL;
-//-(void)videoRecordingFailed;
-//-(void)snapshotTaken:(NSData*)snapshotData;
-//-(void)snapshotFailed;
+//letrehozott functions
+-(void)videoRecordingComplete:(NSURL*)videoURL;
+-(void)videoRecordingFailed;
+-(void)snapshotTaken:(NSData*)snapshotData;
+-(void)snapshotFailed;
 
 @end
 
